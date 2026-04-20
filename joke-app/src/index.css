@@ -1,0 +1,466 @@
+:root {
+  --text: #4a2c1b;
+  --text-h: #2c1810;
+  --bg: #fff9ef;
+  --border: #f5d742;
+  --code-bg: #fff0b5;
+  --accent: #e83e8c;
+  --accent-bg: rgba(232, 62, 140, 0.15);
+  --accent-border: rgba(232, 62, 140, 0.5);
+  --social-bg: rgba(245, 215, 66, 0.2);
+  --shadow: rgba(0, 0, 0, 0.15) 0 10px 15px -3px, rgba(0, 0, 0, 0.1) 0 4px 6px -2px;
+  
+  --sans: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', system-ui, cursive, sans-serif;
+  --heading: 'Luckiest Guy', 'Fredoka One', 'Comic Neue', cursive;
+  --mono: 'Courier Prime', 'Courier New', monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.5px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f0dbb2;
+    --text-h: #fff2db;
+    --bg: #1f1a0c;
+    --border: #e6b422;
+    --code-bg: #2d2412;
+    --accent: #ff6b9d;
+    --accent-bg: rgba(255, 107, 157, 0.2);
+    --accent-border: rgba(255, 107, 157, 0.6);
+    --social-bg: rgba(230, 180, 34, 0.2);
+    --shadow: rgba(0, 0, 0, 0.5) 0 10px 15px -3px, rgba(0, 0, 0, 0.3) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(0.9) sepia(1) saturate(3) hue-rotate(-10deg);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #2c1a0e 0%, #1f1408 100%);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: radial-gradient(circle at 10% 20%, rgba(245, 215, 66, 0.08) 2%, transparent 2.5%);
+  background-size: 28px 28px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* NAVBAR estilo carpa de circo */
+nav {
+  background: linear-gradient(90deg, #dc2626, #facc15, #dc2626);
+  padding: clamp(12px, 4vw, 18px) clamp(15px, 5vw, 30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(15px, 4vw, 32px);
+  border-bottom: 4px solid #fff3b0;
+  box-shadow: 0 6px 0 #7c2d12;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+nav::before {
+  content: "🎪";
+  font-size: clamp(24px, 6vw, 32px);
+  position: absolute;
+  left: clamp(10px, 3vw, 20px);
+  top: 50%;
+  transform: translateY(-50%);
+  filter: drop-shadow(2px 2px 0 #7c2d12);
+  pointer-events: none;
+}
+
+nav::after {
+  content: "🎪";
+  font-size: clamp(24px, 6vw, 32px);
+  position: absolute;
+  right: clamp(10px, 3vw, 20px);
+  top: 50%;
+  transform: translateY(-50%);
+  filter: drop-shadow(2px 2px 0 #7c2d12);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  nav::before,
+  nav::after {
+    display: none;
+  }
+}
+
+nav a {
+  color: #1f1a0c;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  background: #fff3bf;
+  padding: clamp(6px, 2vw, 10px) clamp(12px, 4vw, 24px);
+  border-radius: 40px;
+  transition: 0.2s;
+  box-shadow: 0 3px 0 #b45309;
+  font-family: var(--heading);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  nav a {
+    white-space: normal;
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+nav a:hover {
+  transform: translateY(-2px);
+  background: #ffe48f;
+  box-shadow: 0 5px 0 #b45309;
+  color: #b91c1c;
+}
+
+nav a:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #b45309;
+}
+
+/* CONTENEDOR */
+.container {
+  padding: clamp(16px, 5vw, 32px) clamp(16px, 5vw, 24px);
+  max-width: 900px;
+  width: 90%;
+  margin: 20px auto;
+  background: rgba(255, 249, 239, 0.9);
+  backdrop-filter: blur(2px);
+  border-radius: 60px 60px 40px 40px;
+  border: 2px dashed var(--accent);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    margin: 15px auto;
+    padding: 20px 12px;
+  }
+}
+
+/* TÍTULOS - CORREGIDO: NADA SE CORTA */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--heading);
+  font-weight: 400;
+  color: var(--text-h);
+  text-shadow: 2px 2px 0 var(--border);
+  letter-spacing: 1px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+h1 {
+  font-size: clamp(32px, 8vw, 62px);
+  letter-spacing: -0.5px;
+  margin: clamp(16px, 5vw, 32px) 0;
+  background: linear-gradient(135deg, #e83e8c, #f5d742, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(20px, 5vw, 28px);
+  line-height: 1.25;
+  margin: 0 0 12px 0;
+}
+
+h3 {
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.3;
+}
+
+p, span, li, a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* CORRECCIÓN: Tarjetas y cualquier texto interno */
+.card h2, 
+.card h3, 
+.card p,
+.card span {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 20px;
+  color: var(--text-h);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+code {
+  font-size: clamp(13px, 4vw, 15px);
+  line-height: 1.35;
+  padding: 4px 12px;
+  background: var(--code-bg);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 200, 0.6), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* INPUT estilo boleto de circo */
+input {
+  padding: clamp(10px, 3vw, 14px) clamp(12px, 4vw, 16px);
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 100px;
+  border: 2px solid var(--border);
+  background: #fffff0;
+  font-family: var(--sans);
+  font-size: clamp(14px, 4vw, 16px);
+  transition: 0.2s;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232, 62, 140, 0.3);
+}
+
+/* BOTONES estilo payaso / carpa */
+button {
+  padding: clamp(8px, 3vw, 12px) clamp(16px, 4vw, 24px);
+  margin: 5px;
+  border: none;
+  border-radius: 60px;
+  background: #facc15;
+  color: #2c1810;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: var(--heading);
+  font-size: clamp(14px, 4vw, 16px);
+  transition: 0.1s linear;
+  box-shadow: 0 5px 0 #b45309;
+  transform: translateY(-2px);
+  min-width: 80px;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  button {
+    white-space: normal;
+    min-width: 70px;
+    padding: 8px 12px;
+  }
+}
+
+button:hover {
+  background: #f5b81b;
+  transform: translateY(0px);
+  box-shadow: 0 2px 0 #b45309;
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+/* CARD estilo carpa individual - CORREGIDO: texto nunca se corta */
+.card {
+  background: #fff6e0;
+  padding: clamp(16px, 4vw, 24px) clamp(16px, 4vw, 20px);
+  margin-bottom: 20px;
+  border-radius: clamp(30px, 8vw, 50px) clamp(15px, 4vw, 20px) clamp(30px, 8vw, 50px) clamp(15px, 4vw, 20px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+  border-left: 6px solid var(--accent);
+  border-bottom: 3px solid var(--border);
+  transition: 0.2s;
+  color: #3d2a1c;
+  overflow-x: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Texto dentro de cards nunca se corta */
+.card * {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 768px) {
+  .card {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card:hover {
+  transform: rotate(0.5deg) scale(1.01);
+  background: #fffae9;
+}
+
+/* TINDER CARD animación circo */
+.tinder {
+  transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.3s ease;
+  background: radial-gradient(ellipse at 20% 30%, #fff3cf, #ffefb9);
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+}
+
+.tinder:active {
+  cursor: grabbing;
+}
+
+/* Swipe izquierda - CORREGIDO: no se corta al hacer swipe */
+.left {
+  transform: translateX(clamp(-120px, -30vw, -180px)) rotate(clamp(-8deg, -3vw, -15deg)) scale(0.92);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.25s ease-out;
+  pointer-events: none;
+}
+
+/* Swipe derecha */
+.right {
+  transform: translateX(clamp(120px, 30vw, 180px)) rotate(clamp(6deg, 2vw, 12deg)) scale(0.92);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.25s ease-out;
+  pointer-events: none;
+}
+
+/* detalles adicionales circenses */
+hr {
+  border: none;
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #e83e8c, #e83e8c 20px, #facc15 20px, #facc15 40px);
+  margin: 24px 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff9ef;
+}
+
+/* Scrollbar temática circo */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2c1a0e;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #e83e8c, #facc15);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff6b9d, #f5b81b);
+}
+
+/* Ajustes para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  button:hover {
+    transform: translateY(-2px);
+    background: #facc15;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+  
+  nav a:hover {
+    transform: none;
+    background: #fff3bf;
+  }
+}
+
+/* Optimización para APK/WebView */
+@media (max-width: 480px) {
+  .container {
+    border-radius: 40px 40px 30px 30px;
+  }
+  
+  h1 {
+    margin: 15px 0;
+  }
+}
+
+/* Evitar cortes en elementos flotantes */
+#root > * {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Asegurar que los emojis no se corten */
+nav::before, nav::after {
+  content: "🎪";
+  display: inline-block;
+}
+
+/* CORRECCIÓN IMPORTANTE: Forzar que ningún texto se desborde */
+div, section, article, main, aside {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Para títulos largos como "chistes juanpablo" */
+h2, .card h2, .container h2, section h2 {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+}
