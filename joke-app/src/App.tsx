@@ -8,8 +8,7 @@ import Login from "./login";
 import Register from "./Registro";
 import Logout from "./Logout";
 
-// ——— Rutas donde NO se muestra la navbar ———
-const HIDDEN_NAV_ROUTES = ["/", "/registro", "/logout"];
+const HIDDEN_NAV_ROUTES = ["/", "/login", "/registro", "/logout"];
 
 function NavBar() {
   const location = useLocation();
@@ -93,9 +92,7 @@ function NavBar() {
 
         .navbar-links a:hover  { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); }
         .navbar-links a.active { color: #f8fafc; background: rgba(99,102,241,0.15); }
-
         .nav-icon { font-size: 14px; opacity: 0.8; }
-
         .navbar-right { display: flex; align-items: center; gap: 10px; }
 
         .btn-logout {
@@ -134,19 +131,16 @@ function NavBar() {
 
       <nav className="navbar">
         <Link to="/home" className="navbar-brand">Estudiantes</Link>
-
         <ul className="navbar-links">
-          <NavLink to="/home"      icon="🏠" label="Home"       />
-          <NavLink to="/favorites" icon="⭐" label="Favoritos"  />
-          <NavLink to="/original"  icon="🎨" label="Original"   />
-          <NavLink to="/info"      icon="ℹ️"  label="Informativa"/>
-          <NavLink to="/user"      icon="👤" label="Usuario"    />
+          <NavLink to="/home"      icon="🏠" label="Home"        />
+          <NavLink to="/favorites" icon="⭐" label="Favoritos"   />
+          <NavLink to="/original"  icon="🎨" label="Original"    />
+          <NavLink to="/info"      icon="ℹ️"  label="Informativa" />
+          <NavLink to="/user"      icon="👤" label="Usuario"     />
         </ul>
-
         <div className="navbar-right">
           <Link to="/logout" className="btn-logout">
-            <span>↩</span>
-            <span>Salir</span>
+            <span>↩</span><span>Salir</span>
           </Link>
         </div>
       </nav>
@@ -156,10 +150,9 @@ function NavBar() {
 
 function NavLink({ to, icon, label }: { to: string; icon: string; label: string }) {
   const location = useLocation();
-  const isActive = location.pathname.startsWith(to);
   return (
     <li>
-      <Link to={to} className={isActive ? "active" : ""}>
+      <Link to={to} className={location.pathname.startsWith(to) ? "active" : ""}>
         <span className="nav-icon">{icon}</span>
         <span>{label}</span>
       </Link>
@@ -169,24 +162,25 @@ function NavLink({ to, icon, label }: { to: string; icon: string; label: string 
 
 function App() {
   return (
-    <BrowserRouter>
+    // 👇 basename debe coincidir con el base URL del servidor
+    <BrowserRouter basename="/JokeAPI">
       <NavBar />
       <div className="page-content">
         <Routes>
-          {/* ——— La app arranca en Login ——— */}
+          {/* La app arranca en login */}
           <Route path="/"         element={<Navigate to="/login" replace />} />
 
-          {/* ——— Auth (sin navbar) ——— */}
+          {/* Auth — sin navbar */}
           <Route path="/login"    element={<Login />}    />
           <Route path="/registro" element={<Register />} />
           <Route path="/logout"   element={<Logout />}   />
 
-          {/* ——— App principal (con navbar) ——— */}
+          {/* App principal — con navbar */}
           <Route path="/home"      element={<Home />}      />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/original"  element={<Original />}  />
-          <Route path="/info"      element={<Info />}       />
-          <Route path="/user"      element={<User />}       />
+          <Route path="/info"      element={<Info />}      />
+          <Route path="/user"      element={<User />}      />
         </Routes>
       </div>
     </BrowserRouter>
